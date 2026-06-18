@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT Venezuela - 12% OFF</title>
+  <style>
+    body { font-family: Arial; background: #0f172a; color: white; margin: 0; padding: 20px; text-align: center; }
+   .card { background: #1e293b; max-width: 400px; margin: 50px auto; padding: 30px; border-radius: 20px; }
+   .precio { font-size: 48px; color: #22c55e; margin: 10px 0; font-weight: bold; }
+   .btn { background: #22c55e; color: #000; padding: 15px; display: block; margin: 20px 0; border-radius: 10px; text-decoration: none; font-weight: bold; }
+   .sec { background: #0f172a; padding: 10px; border-radius: 10px; margin: 10px 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>USDT Venezuela</h1>
+    <p>Precio de venta hoy:</p>
+    <div class="precio" id="precio">712.50 VEF</div>
+    <p>12% más barato que Binance P2P</p>
+
+    <div class="sec">✅ Pago Móvil & Binance Pay<br>✅ Entrega en 2 minutos<br>✅ Tasa fija sin sorpresas</div>
+
+    <a class="btn" href="https://wa.me/58TU_NUMERO?text=Quiero%20comprar%20USDT">Comprar por WhatsApp</a>
+    <a class="btn" style="background:#0088cc" href="https://t.me/TU_USUARIO">Comprar por Telegram</a>
+
+    <p style="font-size:12px;color:#94a3b8;margin-top:30px">
+      Mínimo: 10 USDT | Máximo: 1000 USDT<br>
+      Horario: 8AM - 10PM
+    </p>
+  </div>
+
+  <script>
+    // Actualiza el precio automático desde Binance
+    fetch('https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({page:1,rows:1,asset:'USDT',fiat:'VES',tradeType:'SELL'})
+    }).then(r=>r.json()).then(d=>{
+      const binance = parseFloat(d.data[0].adv.price)
+      const miPrecio = binance * 0.88
+      document.getElementById('precio').innerText = miPrecio.toFixed(2) + ' VEF'
+    }).catch(()=>{})
+  </script>
+</body>
+</html>
